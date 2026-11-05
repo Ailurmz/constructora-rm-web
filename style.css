@@ -1,0 +1,235 @@
+/*
+Theme Name: Constructora RM
+Theme URI: https://altoagencia.com/
+Author: ALTO
+Author URI: https://altoagencia.com/
+Description: Tema de Constructora RM. Construimos confianza desde los cimientos. Todo editable desde el editor de bloques: textos, imágenes y secciones. Incluye barra de avance de obra, cotas animadas, cifras, línea de tiempo, antes y después, formulario a WhatsApp y SEO técnico.
+Version: 1.0.0
+Requires at least: 6.6
+Tested up to: 7.1
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: constructora-rm
+Tags: full-site-editing, block-patterns, one-page, business, editor-style
+*/
+
+/* ---------- 1. Marca ---------- */
+:root{
+  --rojo:#C8202A; --carbon:#1E1F22; --hormigon:#F3EEE7; --arena:#B89B6E; --acero:#8A8F96; --linea:rgba(30,31,34,.14);
+  --display:var(--wp--preset--font-family--display,"Barlow Condensed",sans-serif);
+  --mono:var(--wp--preset--font-family--mono,"DM Mono",monospace);
+  --ease:cubic-bezier(.22,1,.36,1);
+  --gut:max(18px,env(safe-area-inset-left,0px)); --top-h:78px;
+}
+body{-webkit-font-smoothing:antialiased;background:var(--hormigon)}
+.wp-site-blocks{overflow-x:clip}
+:focus-visible{outline:3px solid var(--rojo);outline-offset:3px}
+:where(h1,h2,h3){text-wrap:balance}
+.rm-sec{position:relative}
+.rm-sec .wp-block-group>*,.rm-sec>*{margin-block:0}
+.rm-sec :is(p,h1,h2,h3,ul,figure){margin-block:0}
+.rm-sec ul{list-style:none;padding:0}
+.wrap{max-width:1280px;margin-inline:auto;padding-inline:var(--gut);display:grid;gap:32px}
+/* grilla técnica de fondo, como un plano */
+.rm-main{background-image:linear-gradient(var(--linea) 1px,transparent 1px),linear-gradient(90deg,var(--linea) 1px,transparent 1px);background-size:64px 64px;background-position:-1px -1px}
+.rm-main>.rm-sec:not(.hero):not(.rm-marquee){background:color-mix(in srgb,var(--hormigon) 82%,transparent)}
+.rm-page{max-width:820px;margin-inline:auto;padding:calc(var(--top-h) + 60px) var(--gut) 80px}
+.sec-n,.kicker{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--rojo);display:flex;align-items:center;gap:10px}
+.sec-n::before,.kicker::before{content:"";width:28px;height:2px;background:currentColor}
+.sec-head{display:grid;gap:14px;max-width:880px}
+.sec-title{font-size:clamp(44px,6.6vw,96px)}
+.sec-lead{font-size:19px;color:#4D4F55;max-width:58ch}
+.note{font-family:var(--mono);font-size:12px;color:var(--acero)}
+.checks{display:grid;gap:8px}
+.checks li{padding-left:24px;position:relative}
+.checks li::before{content:"";position:absolute;left:0;top:.55em;width:12px;height:2px;background:var(--rojo)}
+
+/* ---------- 2. Botones ---------- */
+.wp-block-button__link{transition:transform .4s var(--ease),background-color .3s,color .3s;border:2px solid transparent}
+.wp-block-button__link:hover{transform:translateY(-3px)}
+.wp-block-button.is-red .wp-block-button__link{background:var(--rojo);color:#fff}
+.wp-block-button.is-red .wp-block-button__link:hover{background:var(--carbon)}
+.wp-block-button.is-style-outline .wp-block-button__link{background:transparent;border-color:currentColor;color:var(--carbon)}
+.wp-block-button.is-light .wp-block-button__link{color:#fff}
+.wp-block-button.is-sm .wp-block-button__link{padding:11px 18px;font-size:15px}
+
+/* ---------- 3. Encabezado, avance de obra y pie ---------- */
+.rm-top{position:fixed;z-index:50;top:0;left:0;right:0;margin:0!important;height:var(--top-h);padding:0 var(--gut);display:flex;align-items:center;gap:24px;transition:background-color .4s,box-shadow .4s}
+.admin-bar .rm-top{top:var(--wp-admin--admin-bar--height,32px)}
+.rm-top>*{margin:0!important}
+.rm-top.is-scrolled{background:rgba(243,238,231,.94);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--linea)}
+.rm-logo{margin-right:auto!important}
+.rm-logo img{width:auto;max-height:56px}
+.rm-top:not(.is-scrolled) .rm-logo img{filter:brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0,0,0,.35))}
+.rm-nav{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:16px;gap:26px}
+.rm-top:not(.is-scrolled) .rm-nav{color:#fff}
+.rm-nav a{text-decoration:none}
+.rm-nav a:hover{color:var(--rojo)}
+.rm-progress{position:fixed;z-index:60;left:0;right:0;top:0;height:4px;background:transparent;pointer-events:none}
+.admin-bar .rm-progress{top:var(--wp-admin--admin-bar--height,32px)}
+.rm-progress i{display:block;height:100%;width:0;background:var(--rojo)}
+.rm-progress b{position:absolute;right:var(--gut);top:8px;font-family:var(--mono);font-weight:400;font-size:11px;background:var(--carbon);color:#fff;padding:3px 8px;opacity:0;transition:opacity .3s}
+.rm-progress.is-on b{opacity:1}
+.rm-foot{background:var(--carbon);color:#C9C6C0;margin:0!important;padding:70px 0 40px}
+.f-in{grid-template-columns:auto 1fr;align-items:center;gap:20px 40px}
+.rm-flogo img{filter:brightness(0) invert(.92);max-height:70px;width:auto}
+.f-desc{max-width:52ch}
+.f-claim{grid-column:1/-1;font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(26px,3.4vw,44px);color:#fff;line-height:1}
+.f-copy{grid-column:1/-1;font-family:var(--mono);font-size:12px;border-top:1px solid rgba(255,255,255,.15);padding-top:18px}
+.f-copy a{color:#fff}
+
+/* ---------- 4. Portada ---------- */
+.hero{min-height:100svh;display:grid;align-items:end;overflow:hidden;color:#fff;background:var(--carbon)}
+.hero-bg{position:absolute!important;inset:0;margin:0!important}
+.hero-bg img{width:100%;height:100%;object-fit:cover;transform:scale(1.08);transition:transform 1.6s var(--ease)}
+.is-ready .hero-bg img{transform:scale(1)}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(20,20,22,.82) 0%,rgba(20,20,22,.45) 55%,rgba(20,20,22,.1) 100%),linear-gradient(0deg,rgba(20,20,22,.55),transparent 40%);pointer-events:none}
+.hero-in{position:relative;z-index:2;padding-top:calc(var(--top-h) + 60px);padding-bottom:70px;gap:22px;width:100%}
+.hero .kicker{color:#fff}
+.hero-title{font-size:clamp(64px,11vw,170px)!important;line-height:.86!important;max-width:9ch}
+.hero-title span{color:var(--rojo);display:inline-block}
+.hero-lead{font-size:clamp(17px,1.5vw,21px);max-width:46ch;color:#E9E5DE}
+.obra-badge{position:absolute;right:var(--gut);bottom:70px;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.06em;border:1px solid rgba(255,255,255,.4);padding:14px 16px;backdrop-filter:blur(6px);background:rgba(20,20,22,.35)}
+.obra-badge strong{display:block;font-family:var(--display);font-size:46px;line-height:1;color:#fff}
+.rm-cota{position:absolute;z-index:2;pointer-events:none;color:#fff;font-family:var(--mono);font-size:11px}
+.rm-cota i{position:absolute;inset:0;border:1px solid currentColor;border-left-width:0;border-right-width:0;opacity:.8}
+.rm-cota i::before,.rm-cota i::after{content:"";position:absolute;top:-6px;bottom:-6px;width:1px;background:currentColor}
+.rm-cota i::before{left:0}.rm-cota i::after{right:0}
+.rm-cota b{position:absolute;left:50%;top:-20px;transform:translateX(-50%);font-weight:400;background:rgba(20,20,22,.6);padding:1px 6px}
+
+/* ---------- 5. Marquesina ---------- */
+.rm-marquee{background:var(--rojo);color:#fff;overflow:hidden;white-space:nowrap;padding:16px 0;margin:0!important}
+.rm-marquee p{display:inline-block;margin:0;font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(28px,3.6vw,52px);line-height:1;letter-spacing:.02em}
+.rm-marquee .track{display:inline-flex;animation:rm-mq 40s linear infinite}
+.rm-marquee .track span{padding-right:.6em}
+.rm-marquee:hover .track{animation-play-state:paused}
+@keyframes rm-mq{to{transform:translateX(-50%)}}
+
+/* ---------- 6. Nosotros y cifras ---------- */
+.about-sec,.svc-sec,.obras-sec,.proc-sec,.ba-sec,.bs-sec,.val-sec,.ct-sec{padding:110px 0}
+.about{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+.about-copy{display:grid;gap:18px}
+.quote-line{font-family:var(--display);font-weight:500;font-size:26px;line-height:1.15;border-left:3px solid var(--rojo);padding-left:16px}
+.about-media{position:relative}
+.about-img img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block}
+.cota{font-family:var(--mono);font-size:12px;color:var(--carbon);display:flex;align-items:center;gap:8px;margin-top:10px!important}
+.cota::before,.cota::after{content:"";flex:1;height:1px;background:var(--carbon)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border-top:2px solid var(--carbon)}
+.stat{padding:26px 22px 0 0;display:grid;gap:6px}
+.stat+.stat{border-left:1px solid var(--linea);padding-left:22px}
+.stat-n{font-family:var(--display);font-weight:700;font-size:clamp(64px,8vw,120px);line-height:.85;color:var(--rojo)}
+.stat-l{font-size:15px;color:#4D4F55;max-width:24ch}
+
+/* ---------- 7. Servicios ---------- */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--carbon)}
+.svc{padding:34px 28px;display:grid;gap:14px;align-content:start;background:var(--hormigon);transition:background-color .4s,color .4s}
+.svc+.svc{border-left:1px solid var(--carbon)}
+.svc:hover{background:var(--carbon);color:#fff}
+.svc:hover .checks li::before{background:var(--arena)}
+.code{font-family:var(--mono);font-size:13px;width:52px;height:52px;display:grid;place-items:center;border:2px solid var(--rojo);color:var(--rojo)}
+.svc h3{font-size:clamp(32px,3vw,44px)}
+
+/* ---------- 8. Obras ---------- */
+.obras-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.obra{display:grid;gap:8px;align-content:start}
+.obra-img{overflow:hidden;position:relative}
+.obra-img img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform .9s var(--ease),filter .6s}
+.obra:hover .obra-img img{transform:scale(1.06);filter:saturate(1.15)}
+.obra-img::after{content:"Ver obra";position:absolute;left:12px;bottom:12px;font-family:var(--mono);font-size:11px;background:var(--rojo);color:#fff;padding:5px 9px;transform:translateY(140%);transition:transform .45s var(--ease)}
+.obra:hover .obra-img::after{transform:none}
+.obra-tag{font-family:var(--mono);font-size:12px;color:var(--rojo);text-transform:uppercase;margin-top:6px!important}
+.obra h3{font-size:30px}
+.obra-meta{font-size:14px;color:#5A5C62}
+
+/* ---------- 9. Proceso ---------- */
+.timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;position:relative;padding-top:34px}
+.timeline::before{content:"";position:absolute;left:0;right:0;top:9px;height:2px;background:var(--linea)}
+.timeline::after{content:"";position:absolute;left:0;top:9px;height:2px;width:var(--fill,0%);background:var(--rojo);transition:width .2s linear}
+.etapa{position:relative;display:grid;gap:10px}
+.etapa::before{content:"";position:absolute;top:-34px;left:0;width:20px;height:20px;border:2px solid var(--carbon);background:var(--hormigon);transform:rotate(45deg);transition:background-color .4s,border-color .4s}
+.etapa.is-on::before{background:var(--rojo);border-color:var(--rojo)}
+.etapa-n{font-family:var(--display);font-weight:700;font-size:64px;line-height:.9;color:transparent;-webkit-text-stroke:1.5px var(--carbon)}
+.etapa.is-on .etapa-n{color:var(--carbon)}
+.etapa h3{font-size:30px}
+
+/* ---------- 10. Antes y después ---------- */
+.ba{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ba img{width:100%;display:block}
+.rm-js .ba{--pos:55%;display:block;aspect-ratio:16/9;overflow:hidden;cursor:ew-resize;user-select:none;touch-action:pan-y}
+.rm-js .ba figure{position:absolute;inset:0;margin:0}
+.rm-js .ba img{height:100%;object-fit:cover}
+.rm-js .ba-before{z-index:1;clip-path:inset(0 0 0 var(--pos))}
+.ba-handle{position:absolute;z-index:3;top:0;bottom:0;left:var(--pos);width:3px;background:var(--rojo);transform:translateX(-50%)}
+.ba-handle span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:48px;height:48px;background:var(--rojo);color:#fff;display:grid;place-items:center;font-size:13px}
+.ba-tag{font-family:var(--mono);font-size:12px;text-transform:uppercase;background:var(--carbon);color:#fff;padding:5px 10px;justify-self:start}
+.rm-js .ba-tag{position:absolute;z-index:2;bottom:14px}
+.ba-tag.is-left{left:14px;background:var(--rojo)}.ba-tag.is-right{right:14px}
+
+/* ---------- 11. Backstage, valores, contacto ---------- */
+.bs{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.bs-copy{display:grid;gap:18px}
+.bs-img img{width:100%;aspect-ratio:5/4;object-fit:cover;display:block;filter:grayscale(.15) contrast(1.05)}
+.val-sec{background:var(--carbon)!important;color:#fff}
+.val-sec .sec-title{color:#fff}
+.vals{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.val{padding:28px 28px 0 0;display:grid;gap:12px;border-top:3px solid var(--rojo)}
+.val+.val{padding-left:28px;border-left:1px solid rgba(255,255,255,.12)}
+.val h3{font-size:40px}
+.val p{color:#C9C6C0}
+.ct{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}
+.ct-copy{display:grid;gap:18px}
+.direct{display:grid;margin-top:8px!important;border-top:2px solid var(--carbon)}
+.direct li>*{display:flex;justify-content:space-between;gap:14px;padding:15px 0;border-bottom:1px solid var(--linea);text-decoration:none;font-weight:600}
+.direct li>* span:last-child{font-family:var(--mono);font-weight:400;font-size:14px;color:var(--rojo)}
+.rm-form{display:grid;gap:16px;background:#fff;padding:30px;border-top:4px solid var(--rojo);box-shadow:0 30px 60px -40px rgba(0,0,0,.35)}
+.rm-form p{margin:0}
+.rm-form .field{display:grid;gap:6px}
+.rm-form label{font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.06em;font-size:15px}
+.rm-form input,.rm-form select,.rm-form textarea{box-sizing:border-box;width:100%;font:inherit;padding:13px 14px;border:1.5px solid #CFC9C0;background:var(--hormigon);border-radius:0}
+.rm-form input:focus,.rm-form select:focus,.rm-form textarea:focus{outline:none;border-color:var(--rojo)}
+.rm-form__btn{width:100%;border:0;cursor:pointer;background:var(--rojo);color:#fff;font-family:var(--display);font-weight:700;text-transform:uppercase;letter-spacing:.08em;font-size:18px;padding:18px}
+.rm-form__btn:hover{background:var(--carbon)}
+.rm-form__err{color:var(--rojo);font-size:14px}
+
+/* ---------- 12. Animación de entrada (solo con JavaScript) ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .rm-js .rise{opacity:.2;transform:translateY(36px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+  .rm-js .rise.is-in{opacity:1;transform:none}
+  .rm-js .hero-title span{transform:translateY(40%);opacity:0;transition:transform .9s var(--ease) .3s,opacity .9s var(--ease) .3s}
+  .is-ready .hero-title span{transform:none;opacity:1}
+}
+
+/* ---------- 13. Celular ---------- */
+@media (max-width:900px){
+  :root{--top-h:66px}
+  .rm-top__cta{display:none}
+  .about,.bs,.ct{grid-template-columns:1fr}
+  .svc-grid,.vals{grid-template-columns:1fr}
+  .svc+.svc{border-left:0;border-top:1px solid var(--carbon)}
+  .val+.val{padding-left:0;border-left:0;margin-top:20px!important}
+  .obras-grid{grid-template-columns:1fr 1fr}
+  .timeline{grid-template-columns:1fr 1fr}
+  .stats{grid-template-columns:1fr}
+  .stat+.stat{border-left:0;padding-left:0;border-top:1px solid var(--linea)}
+  .obra-badge{display:none}
+  .f-in{grid-template-columns:1fr}
+}
+@media (max-width:520px){.obras-grid,.timeline{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important}}
+
+/* ---------- 14. Editor ---------- */
+.editor-styles-wrapper .rm-top{position:relative;background:var(--carbon)}
+.editor-styles-wrapper .hero{min-height:560px}
+
+/* ---------- 15. Ajustes ---------- */
+.wp-site-blocks>*,.wp-site-blocks>main,.rm-main>.wp-block-post-content>*{margin-block-start:0!important}
+.wp-site-blocks{padding-top:0!important}
+.obras-grid .obra:nth-child(3) .obra-img img{object-position:15% 50%}
+@media (max-width:900px){
+  .timeline{padding-top:0;row-gap:36px}
+  .timeline::before,.timeline::after{display:none}
+  .etapa{padding-top:34px}
+  .etapa::before{top:0}
+}
+@media (max-width:520px){.obra-img img{aspect-ratio:4/3}}
