@@ -40,8 +40,52 @@
   var hero = d.querySelector('.hero');
   if (hero && innerWidth > 900) setTimeout(function () { cota(hero, 'Fachada 14,20 m', 'right:6%;width:34%;top:calc(var(--top-h) + 70px);height:0'); }, 900);
 
+  /* títulos que aparecen palabra por palabra (solo en pantalla: el texto guardado no cambia) */
+  if (!reduce) $$('.sec-title,.hero-title').forEach(function (h) {
+    var n = 0, isHero = h.classList.contains('hero-title');
+    (function walk(el) {
+      [].slice.call(el.childNodes).forEach(function (c) {
+        if (c.nodeType === 3) {
+          var f = d.createDocumentFragment();
+          c.textContent.split(/(\s+)/).forEach(function (t) {
+            if (!t) return;
+            if (/^\s+$/.test(t)) { f.appendChild(d.createTextNode(t)); return; }
+            var w = d.createElement('span'), i = d.createElement('i'); w.className = 'w'; i.textContent = t;
+            i.style.transitionDelay = ((isHero ? 250 : 0) + (n++) * 55) + 'ms'; w.appendChild(i); f.appendChild(w);
+          });
+          c.parentNode.replaceChild(f, c);
+        } else if (c.nodeType === 1 && c.tagName !== 'BR') walk(c);
+      });
+    })(h);
+  });
+
+  /* plano de la casa que se dibuja sobre la portada */
+  var heroBox = d.querySelector('.hero');
+  if (heroBox && innerWidth > 900) {
+    heroBox.insertAdjacentHTML('beforeend', '<svg class="rm-plano" viewBox="0 0 640 360" aria-hidden="true">' +
+      '<line pathLength="1" x1="0" y1="340" x2="640" y2="340"/>' +
+      '<path pathLength="1" d="M80 340V170h480v170"/><path pathLength="1" d="M60 170L180 90h280l120 80"/>' +
+      '<path pathLength="1" d="M140 90V40h50v50"/><rect pathLength="1" x="130" y="210" width="70" height="90"/><rect pathLength="1" x="285" y="230" width="70" height="110"/>' +
+      '<rect pathLength="1" x="440" y="210" width="70" height="90"/><path pathLength="1" d="M80 120V60M560 120V60M80 70h480"/></svg>');
+    $$('.rm-plano [pathLength]', heroBox).forEach(function (e, i) { e.style.animationDelay = (0.6 + i * 0.25) + 's'; });
+  }
+
+  /* parallax suave en las fotos */
+  var par = $$('.obra-img img,.about-img img,.bs-img img');
+  if (!reduce && par.length) {
+    var tick = false;
+    var pr = function () {
+      tick = false;
+      par.forEach(function (im) {
+        var r = im.parentNode.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) return;
+        im.style.setProperty('--py', (((r.top + r.height / 2 - innerHeight / 2) / innerHeight) * -6).toFixed(2) + '%');
+      });
+    };
+    addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(pr); } }, { passive: true }); pr();
+  }
+
   /* aparición al hacer scroll + contadores */
-  var rise = $$('.sec-head,.svc,.obra,.stat,.etapa,.val,.rm-form,.about-media,.bs-img,.ba,.quote-line');
+  var rise = $$('.sec-title,.sec-head,.testi,.faq-list details,.svc,.obra,.stat,.etapa,.val,.rm-form,.about-media,.bs-img,.ba,.quote-line');
   function count(el) {
     var m = el.textContent.match(/^(\D*)(\d+)(.*)$/); if (!m || reduce) return;
     var to = +m[2], t0 = null;
@@ -95,6 +139,7 @@
     var a = e.target.closest && e.target.closest('a[href*="#"]'); if (!a) return;
     var u = new URL(a.href, location.href); if (u.pathname !== location.pathname || !u.hash || u.hash === '#') return;
     var t = d.getElementById(decodeURIComponent(u.hash.slice(1))); if (!t) return;
+    var x = a.closest('.is-menu-open') && d.querySelector('.is-menu-open .wp-block-navigation__responsive-container-close'); if (x) x.click();
     e.preventDefault(); scrollTo({ top: t.getBoundingClientRect().top + scrollY - (top ? top.offsetHeight : 0) + 2, behavior: reduce ? 'auto' : 'smooth' });
     history.replaceState(null, '', u.hash);
   });

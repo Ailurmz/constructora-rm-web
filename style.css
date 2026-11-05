@@ -3,7 +3,7 @@ Theme Name: Constructora RM
 Theme URI: https://altoagencia.com/
 Author: ALTO
 Author URI: https://altoagencia.com/
-Description: Tema de Constructora RM. Construimos confianza desde los cimientos. Todo editable desde el editor de bloques: textos, imágenes y secciones. Incluye barra de avance de obra, cotas animadas, cifras, línea de tiempo, antes y después, formulario a WhatsApp y SEO técnico.
+Description: Tema de Constructora RM. Construimos confianza desde los cimientos. Todo editable desde el editor de bloques: textos, imágenes y secciones. Tipografía Bodoni Moda + Jost. Incluye barra de avance de obra, cotas animadas, cifras, línea de tiempo, antes y después, formulario a WhatsApp y SEO técnico.
 Version: 1.0.0
 Requires at least: 6.6
 Tested up to: 7.1
@@ -17,8 +17,8 @@ Tags: full-site-editing, block-patterns, one-page, business, editor-style
 /* ---------- 1. Marca ---------- */
 :root{
   --rojo:#C8202A; --carbon:#1E1F22; --hormigon:#F3EEE7; --arena:#B89B6E; --acero:#8A8F96; --linea:rgba(30,31,34,.14);
-  --display:var(--wp--preset--font-family--display,"Barlow Condensed",sans-serif);
-  --mono:var(--wp--preset--font-family--mono,"DM Mono",monospace);
+  --display:var(--wp--preset--font-family--display,"Bodoni Moda",serif);
+  --mono:var(--wp--preset--font-family--body,Jost,sans-serif);
   --ease:cubic-bezier(.22,1,.36,1);
   --gut:max(18px,env(safe-area-inset-left,0px)); --top-h:78px;
 }
@@ -233,3 +233,113 @@ body{-webkit-font-smoothing:antialiased;background:var(--hormigon)}
   .etapa::before{top:0}
 }
 @media (max-width:520px){.obra-img img{aspect-ratio:4/3}}
+
+
+/* =========================================================
+   16. LUJO · tipografía Bodoni Moda + Jost y más movimiento
+   ========================================================= */
+.sec-n,.kicker{font-family:var(--mono);font-weight:500;font-size:11.5px;letter-spacing:.28em}
+.sec-title{font-size:clamp(40px,5.4vw,84px);font-weight:500;letter-spacing:-.015em;line-height:1.02}
+.sec-title em,.hero-title em{font-style:italic;color:var(--rojo);font-weight:400}
+.sec-lead{font-weight:300;font-size:19px}
+.hero-title{font-size:clamp(50px,7.4vw,122px)!important;line-height:.98!important;max-width:12ch;font-weight:500;letter-spacing:-.02em}
+.hero-title em{display:inline-block}
+.hero-lead{font-weight:300}
+.rm-nav{font-family:var(--mono);font-weight:500;font-size:12px;letter-spacing:.22em;gap:30px}
+.rm-progress b{font-family:var(--mono);letter-spacing:.14em;text-transform:uppercase;font-size:10px}
+.obra-badge{letter-spacing:.2em}
+.obra-badge strong{font-weight:500;font-style:italic;font-size:44px}
+.rm-cota{font-family:var(--mono);letter-spacing:.14em;font-size:10px;text-transform:uppercase}
+.rm-marquee{padding:20px 0}
+.rm-marquee p{font-family:var(--display);font-weight:400;font-style:italic;text-transform:none;font-size:clamp(28px,3.4vw,50px);letter-spacing:0}
+.quote-line{font-style:italic;font-weight:400;font-size:28px;line-height:1.25}
+.cota{letter-spacing:.2em}
+.stat-n{font-weight:400;font-style:italic;font-size:clamp(64px,7.4vw,112px)}
+.stat-l{font-weight:300}
+.code{font-weight:500;letter-spacing:.14em;font-size:12px;border-width:1px}
+.svc h3,.obra h3,.etapa h3{font-weight:500}
+.svc h3{font-size:clamp(28px,2.6vw,38px)}
+.obra h3{font-size:28px}
+.obra-tag,.ba-tag,.obra-img::after{font-family:var(--mono);letter-spacing:.2em;font-size:10.5px}
+.etapa-n{font-family:var(--display);font-style:italic;font-weight:400;font-size:72px;-webkit-text-stroke:0;color:#CFC6B8!important;transition:color .5s}
+.etapa.is-on .etapa-n{color:var(--rojo)!important}
+.etapa h3{font-size:28px}
+.direct li>*{font-weight:500}
+.direct li>* span:last-child{font-family:var(--mono);letter-spacing:.06em;font-size:14px}
+.rm-form label{font-family:var(--mono);font-weight:500;font-size:11px;letter-spacing:.24em}
+.rm-form__btn{font-family:var(--mono);font-weight:500;font-size:13px;letter-spacing:.24em}
+.f-claim{font-weight:400;font-style:italic;text-transform:none;font-size:clamp(28px,3.4vw,48px);line-height:1.1}
+.f-copy{font-family:var(--mono);letter-spacing:.08em}
+.wp-block-button.is-sm .wp-block-button__link{padding:12px 20px;font-size:12px}
+
+/* logo sin la línea "— RM —" */
+.rm-logo img{max-height:50px}
+.rm-flogo img{max-height:64px}
+
+/* menú del celular (abre a pantalla completa) */
+.rm-nav .wp-block-navigation__responsive-container.is-menu-open{background:var(--carbon)!important;color:#fff!important;padding:28px var(--gut)}
+.rm-nav .is-menu-open .wp-block-navigation__responsive-container-content{padding-top:70px;align-items:flex-start!important}
+.rm-nav .is-menu-open .wp-block-navigation-item{font-family:var(--display);font-size:40px;letter-spacing:0;text-transform:none;font-weight:400}
+.rm-nav .is-menu-open .wp-block-navigation-item a:hover{color:var(--rojo)}
+.rm-top:not(.is-scrolled) .wp-block-navigation__responsive-container-open{color:#fff}
+
+/* testimonios (fondo oscuro) */
+.val-sec .sec-n{color:var(--arena)}
+.testis{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.testi{border:1px solid rgba(255,255,255,.14);padding:34px 30px;display:grid;gap:22px;align-content:space-between;position:relative;transition:border-color .4s,transform .6s var(--ease)}
+.testi:hover{border-color:var(--rojo);transform:translateY(-6px)}
+.testi::before{content:"";position:absolute;top:-1px;left:30px;width:44px;height:3px;background:var(--rojo)}
+.t-txt{font-family:var(--display);font-style:italic;font-size:22px;line-height:1.4;color:#F3EEE7}
+.t-who{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--arena)}
+.val-strip{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 30px;border-top:1px solid rgba(255,255,255,.14);padding-top:30px;margin-top:20px!important}
+.val-strip .v{font-family:var(--display);font-size:clamp(26px,3vw,42px);color:#fff}
+.val-strip .v:nth-child(even){font-style:italic;color:var(--arena)}
+
+/* preguntas frecuentes */
+.faq-sec{padding:110px 0}
+.faq{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+.faq-copy{display:grid;gap:18px;position:sticky;top:calc(var(--top-h) + 30px)}
+.faq-list{border-top:1px solid var(--carbon)}
+.faq-list details{border-bottom:1px solid var(--linea);padding:0}
+.faq-list summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:20px;align-items:center;padding:24px 0;font-family:var(--display);font-size:clamp(21px,1.9vw,27px);line-height:1.25}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::after{content:"+";font-family:var(--mono);font-weight:300;font-size:28px;color:var(--rojo);transition:transform .4s var(--ease);flex:none}
+.faq-list details[open] summary::after{transform:rotate(45deg)}
+.faq-list details p{padding:0 40px 24px 0;color:#4D4F55;font-weight:300}
+.faq-list summary:hover{color:var(--rojo)}
+
+/* ---------- movimiento de fondo ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .rm-main{animation:rm-grid 80s linear infinite}
+  @keyframes rm-grid{to{background-position:63px 63px}}
+  .is-ready .hero-bg img{animation:rm-kb 26s ease-in-out infinite alternate}
+  @keyframes rm-kb{0%{transform:scale(1) translate(0,0)}100%{transform:scale(1.14) translate(-2.5%,-1.5%)}}
+  .hero::before{content:"";position:absolute;z-index:1;inset:0;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,236,200,.13) 50%,transparent 65%);background-size:300% 100%;animation:rm-sweep 9s ease-in-out infinite}
+  @keyframes rm-sweep{0%{background-position:120% 0}60%,100%{background-position:-20% 0}}
+  /* títulos palabra por palabra */
+  .rm-js .sec-title .w,.rm-js .hero-title .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em;margin-bottom:-.08em}
+  .rm-js .sec-title .w>i,.rm-js .hero-title .w>i{display:inline-block;font-style:inherit;transform:translateY(105%);transition:transform 1s var(--ease)}
+  .rm-js .is-in .w>i,.is-ready .hero-title .w>i{transform:none}
+  /* fotos que se descubren */
+  .rm-js .obra-img img,.rm-js .about-img img,.rm-js .bs-img img{clip-path:inset(100% 0 0 0)}
+  .rm-js .is-in .obra-img img,.rm-js .about-media.is-in img,.rm-js .bs-img.is-in img{clip-path:inset(0 0 0 0)}
+  .rm-js .obra-img img,.rm-js .about-img img,.rm-js .bs-img img{transform:translateY(var(--py,0)) scale(1.12);transition:clip-path 1.3s var(--ease),transform .3s linear,filter .6s}
+  .rm-js .obra:hover .obra-img img{transform:translateY(var(--py,0)) scale(1.18)}
+}
+.rm-js .hero-title span{transform:none!important;opacity:1!important}
+/* plano que se dibuja sobre la portada */
+.rm-plano{position:absolute;z-index:1;right:4%;bottom:12%;width:min(46vw,640px);color:#fff;opacity:.38;pointer-events:none}
+.rm-plano path,.rm-plano line,.rm-plano rect{fill:none;stroke:currentColor;stroke-width:1;vector-effect:non-scaling-stroke}
+@media (prefers-reduced-motion:no-preference){.rm-plano [pathLength]{stroke-dasharray:1;stroke-dashoffset:1;animation:rm-draw 3.2s var(--ease) forwards}}
+@keyframes rm-draw{to{stroke-dashoffset:0}}
+
+@media (max-width:900px){
+  .testis{grid-template-columns:1fr}
+  .faq{grid-template-columns:1fr}
+  .faq-copy{position:static}
+  .rm-plano{display:none}
+  .hero-title{max-width:none}
+}
+.hero-title span.w{color:inherit!important;display:inline-block}
+@media (max-width:900px){.hero-title{font-size:clamp(38px,10.5vw,60px)!important}}
+.rm-nav .is-menu-open .wp-block-navigation__container{align-items:flex-start!important;gap:14px!important}
